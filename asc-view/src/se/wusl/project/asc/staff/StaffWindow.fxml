@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.wusl.project.asc.staff.StaffWindowController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Home">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Home" />
+                  <MenuItem mnemonicParsing="false" text="Log out" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Staff">
+              <items>
+                <MenuItem fx:id="searchStaffMI" mnemonicParsing="false" onAction="#showAddStaffWindow" text="Search" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Order">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Add" />
+                  <MenuItem mnemonicParsing="false" text="Search" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Customer">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Search" />
+                  <MenuItem mnemonicParsing="false" text="Update" />
+                  <MenuItem mnemonicParsing="false" text="Add" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

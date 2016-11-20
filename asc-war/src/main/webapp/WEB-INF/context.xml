@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<import resource="classpath:dataSource.xml" />
+
+	<!-- Account Service Bean -->
+
+	<bean id="accountFacade" class="se.wusl.project.asc.AccountFacadeImpl">
+		<property name="accountService" ref="accountService" />
+	</bean>
+	<bean id="accountService" class="se.wusl.project.asc.AccountServiceImpl">
+		<property name="accountEntityDAO" ref="accountEntityDAO" />
+	</bean>
+	<bean id="accountEntityDAO" class="se.wusl.project.asc.AccountEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="accountFacade" />
+		<property name="service" ref="accountFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.AccountFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- Customer Service Bean -->
+
+	<bean id="customerFacade" class="se.wusl.project.asc.CustomerFacadeImpl">
+		<property name="customerService" ref="customerService" />
+	</bean>
+	<bean id="customerService" class="se.wusl.project.asc.CustomerServiceImpl">
+		<property name="customerEntityDAO" ref="customerEntityDAO" />
+	</bean>
+	<bean id="customerEntityDAO" class="se.wusl.project.asc.CustomerEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="customerFacade" />
+		<property name="service" ref="customerFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.CustomerFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- Item Service Bean -->
+
+	<bean id="itemFacade" class="se.wusl.project.asc.ItemFacadeImpl">
+		<property name="itemService" ref="itemService" />
+	</bean>
+	<bean id="itemService" class="se.wusl.project.asc.ItemServiceImpl">
+		<property name="itemEntityDAO" ref="itemEntityDAO" />
+	</bean>
+	<bean id="itemEntityDAO" class="se.wusl.project.asc.ItemEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="itemFacade" />
+		<property name="service" ref="itemFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.ItemFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- Leave Service Bean -->
+
+	<bean id="leaveFacade" class="se.wusl.project.asc.LeaveFacadeImpl">
+		<property name="leaveService" ref="leaveService" />
+	</bean>
+	<bean id="leaveService" class="se.wusl.project.asc.LeaveServiceImpl">
+		<property name="leaveEntityDAO" ref="leaveEntityDAO" />
+	</bean>
+	<bean id="leaveEntityDAO" class="se.wusl.project.asc.LeaveEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="leaveFacade" />
+		<property name="service" ref="leaveFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.LeaveFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- Order Service Bean -->
+
+	<bean id="orderFacade" class="se.wusl.project.asc.OrderFacadeImpl">
+		<property name="orderService" ref="orderService" />
+	</bean>
+	<bean id="orderService" class="se.wusl.project.asc.OrderServiceImpl">
+		<property name="orderEntityDAO" ref="orderEntityDAO" />
+	</bean>
+	<bean id="orderEntityDAO" class="se.wusl.project.asc.OrderEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="orderFacade" />
+		<property name="service" ref="orderFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.OrderFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- Payment Service Bean -->
+
+	<bean id="paymentFacade" class="se.wusl.project.asc.PaymentFacadeImpl">
+		<property name="paymentService" ref="paymentService" />
+	</bean>
+	<bean id="paymentService" class="se.wusl.project.asc.PaymentServiceImpl">
+		<property name="paymentEntityDAO" ref="paymentEntityDAO" />
+	</bean>
+	<bean id="paymentEntityDAO" class="se.wusl.project.asc.PaymentEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="paymentFacade" />
+		<property name="service" ref="paymentFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.PaymentFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- Service Service Bean -->
+
+	<bean id="serviceFacade" class="se.wusl.project.asc.ServiceFacadeImpl">
+		<property name="serviceService" ref="serviceService" />
+	</bean>
+	<bean id="serviceService" class="se.wusl.project.asc.ServiceServiceImpl">
+		<property name="serviceEntityDAO" ref="serviceEntityDAO" />
+	</bean>
+	<bean id="serviceEntityDAO" class="se.wusl.project.asc.ServiceEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="serviceFacade" />
+		<property name="service" ref="serviceFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.ServiceFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- Staff service bean -->
+
+	<bean id="staffFacade" class="se.wusl.project.asc.StaffFacadeImpl">
+		<property name="staffService" ref="staffService" />
+	</bean>
+	<bean id="staffService" class="se.wusl.project.asc.StaffServiceImpl">
+		<property name="staffEntityDAO" ref="staffEntityDAO" />
+	</bean>
+	<bean id="staffEntityDAO" class="se.wusl.project.asc.StaffEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="staffFacade" />
+		<property name="service" ref="staffFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.StaffFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- Supplier Service Bean -->
+
+	<bean id="supplierFacade" class="se.wusl.project.asc.SupplierFacadeImpl">
+		<property name="supplierService" ref="supplierService" />
+	</bean>
+	<bean id="supplierService" class="se.wusl.project.asc.SupplierServiceImpl">
+		<property name="supplierEntityDAO" ref="supplierEntityDAO" />
+	</bean>
+	<bean id="supplierEntityDAO" class="se.wusl.project.asc.SupplierEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="supplierFacade" />
+		<property name="service" ref="supplierFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.SupplierFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- TakenLeave Service Bean -->
+
+	<bean id="takenLeaveFacade" class="se.wusl.project.asc.TakenLeaveFacadeImpl">
+		<property name="takenLeaveService" ref="takenLeaveService" />
+	</bean>
+	<bean id="takenLeaveService" class="se.wusl.project.asc.TakenLeaveServiceImpl">
+		<property name="takenLeaveEntityDAO" ref="takenLeaveEntityDAO" />
+	</bean>
+	<bean id="takenLeaveEntityDAO" class="se.wusl.project.asc.TakenLeaveEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="takenLeaveFacade" />
+		<property name="service" ref="takenLeaveFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.TakenLeaveFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+
+	<!-- Vehicle Service Bean -->
+
+	<bean id="vehicleFacade" class="se.wusl.project.asc.VehicleFacadeImpl">
+		<property name="vehicleService" ref="vehicleService" />
+	</bean>
+	<bean id="vehicleService" class="se.wusl.project.asc.VehicleServiceImpl">
+		<property name="vehicleEntityDAO" ref="vehicleEntityDAO" />
+	</bean>
+	<bean id="vehicleEntityDAO" class="se.wusl.project.asc.VehicleEntityDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="vehicleFacade" />
+		<property name="service" ref="vehicleFacade" />
+		<property name="serviceInterface" value="se.wusl.project.asc.VehicleFacade" />
+		<property name="replaceExistingBinding" value="true" />
+		<property name="registryPort" value="1099" />
+	</bean>
+</beans>

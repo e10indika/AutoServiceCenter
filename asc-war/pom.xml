@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>se.wusl.project.asc</groupId>
+		<artifactId>auto-service-center-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>asc-war</artifactId>
+	<packaging>war</packaging>
+	<name>asc-war Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<sqlserver.version>6.0.6629.101</sqlserver.version>
+		<!-- <wildfly-home>C:\JBoss\jboss-as-7.1.0.Final</wildfly-home>
+		<wildfly-hostname></wildfly-hostname>
+		<wildfly-port>1099</wildfly-port>
+		<wildfly-username>adminuser</wildfly-username>
+		<wildfly-password>1234</wildfly-password> -->
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>se.wusl.project.asc</groupId>
+			<artifactId>asc-facade-impl</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>se.wusl.project.asc</groupId>
+			<artifactId>asc-facade-api</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>se.wusl.project.asc</groupId>
+			<artifactId>asc-entityservice-impl</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>se.wusl.project.asc</groupId>
+			<artifactId>asc-entityservice-api</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>se.wusl.project.asc</groupId>
+			<artifactId>asc-dao-impl</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>se.wusl.project.asc</groupId>
+			<artifactId>asc-dao-api</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>se.wusl.project.asc</groupId>
+			<artifactId>asc-dto</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+
+		<!-- Database driver -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc42</artifactId>
+			<version>${sqlserver.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.9</version>
+		</dependency>
+
+		<!-- JSTL -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>asc-war</finalName>
+
+		<!-- <sourceDirectory>src</sourceDirectory> -->
+		<plugins>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.10</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>8080</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
+		</plugins>
+		<!-- <plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>7.1.0.Final</version>
+				<configuration>
+					<hostname>${wildfly-hostname}</hostname>
+					<port>${wildfly-port}</port>
+					<username>${wildfly-username}</username>
+					<password>${wildfly-password}</password>
+				</configuration>
+				<executions>
+					Undeploy the application on clean
+					<execution>
+						<id>undeploy</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>undeploy</goal>
+						</goals>
+						<configuration>
+							<hostname>localhost</hostname>
+							<ignoreMissingDeployment>true</ignoreMissingDeployment>
+						</configuration>
+					</execution>
+
+					Deploy the JDBC library
+					<execution>
+						<id>deploy-driver</id>
+						<phase>install</phase>
+						<configuration>
+							<groupId>com.microsoft.sqlserver</groupId>
+							<artifactId>sqljdbc42</artifactId>
+							<type>jar</type>
+							<name>sqljdbc42-6.0.6629.101.jar</name>
+							<match-pattern>sqljdbc-.*</match-pattern>
+						</configuration>
+						<goals>
+							<goal>deploy-artifact</goal>
+						</goals>
+					</execution>
+
+					Add a data source
+					<execution>
+						<id>add-datasource</id>
+						<phase>install</phase>
+						<configuration>
+							<address>subsystem=datasources,data-source=datasources</address>
+							<resource>
+								<resource>
+									<enableResource>true</enableResource>
+									<properties>
+										<connection-url>jdbc:sqlserver://DESKTOP-OGECJLL\SQLEXPRESS:1433/TestDB</connection-url>
+										<jndi-name>java:/jboss/datasources</jndi-name>
+										<enabled>true</enabled>
+										<enable>true</enable>
+										<user-name>DESKTOP-OGECJLL\Indika</user-name>
+										<driver-name>sqljdbc42-6.0.6629.101.jar</driver-name>
+										<use-ccm>false</use-ccm>
+									</properties>
+								</resource>
+							</resource>
+						</configuration>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+					</execution>
+
+					Deploy the application on install
+					<execution>
+						<id>deploy</id>
+						<phase>install</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+ -->	</build>
+	<version>1.0.0-SNAPSHOT</version>
+	<groupId>se.wusl.project.asc</groupId>
+</project>
